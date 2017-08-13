@@ -1,3 +1,5 @@
+use IO::Socket::Async::SSL;
+
 unit class IRC::Client::Server;
 
 has         @.channels where .all ~~ Str|Pair;
@@ -15,6 +17,6 @@ has Str     $.userreal;
 has Str     $.current-nick     is rw;
 has Bool    $.is-connected     is rw;
 has Bool    $.has-quit         is rw;
-has IO::Socket::Async $.socket is rw;
+has $.socket is rw where $_ ~~ IO::Socket::Async|IO::Socket::Async::SSL;
 
 method Str { $!label }
